@@ -51,15 +51,15 @@ function changeTime() {
   const currentDate = new Date().getTime();
   const differenceTime = selectedDate - currentDate;
 
-  const timeData = convertMs(differenceTime);
+  const ourtimeData = convertMs(differenceTime);
 
   if (differenceTime <= 1) {
     return clearInterval(intervalTime);
   }
-  refs.days.textContent = addLeadingZero(timeData.days);
-  refs.hours.textContent = addLeadingZero(timeData.hours);
-  refs.minutes.textContent = addLeadingZero(timeData.minutes);
-  refs.seconds.textContent = addLeadingZero(timeData.seconds);
+  refs.days.textContent = contentadded(ourtimeData.days);
+  refs.hours.textContent = contentadded(ourtimeData.hours);
+  refs.minutes.textContent = contentadded(ourtimeData.minutes);
+  refs.seconds.textContent = contentadded(ourtimeData.seconds);
 }
 function convertMs(ms) {
   // Number of milliseconds per unit of time
@@ -81,7 +81,7 @@ function convertMs(ms) {
 }
 
 // Функція для додавання ведучих нулів до значень
-function addLeadingZero(value) {
+function contentadded(value) {
   return String(value).padStart(2, '0');
 }
 
