@@ -21,6 +21,13 @@ button {
   border-color: green;
 }
 
+.middle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 input {
   width: 300px;
   font-size: 15px;
@@ -32,12 +39,12 @@ input {
   border-color: rgb(67, 201, 203);
 }
 
-.maindiv {
+.divcent {
   display: flex;
   justify-content: center;
 }
 
-.ourbtnstart {
+.btnstart {
   font-size: 15px;
   padding: 6px 8px 6px 8px;
   border: 1px solid #cbb1b1;
@@ -49,22 +56,22 @@ input {
 }
 
 
-.timer {
+.timediv {
   display: flex;
   justify-content: center;
-  margin-top: 18px;
+  margin-top: 15px;
 }
 
-.divstyle {
-  margin-right: 20px;
+.twospansdiv {
+  margin-right: 15px;
 }
 
-.spannamefirst {
+.dataspan {
   font-size: 52px;
   color: rgb(224, 131, 184);
 }
 
-.spannamessecond {
+.namespan {
   display: flex;
   justify-content: center;
   text-align: center;
