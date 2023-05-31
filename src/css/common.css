@@ -21,36 +21,6 @@ button {
   border-color: green;
 }
 
-/* .middle {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
-
-/* .middleofnowhere {
-  margin-left: 30px;
-  margin-right: 30px;
-  margin-top: 190px;
-  font-size: 25px;
-  margin-bottom: 20px;
-  padding: 40px 30px;
-  border: 5px dashed;
-  border-radius: 100%;
-  background-color: palegoldenrod;
-} */
-
-/* .pagereloadbutton {
-  margin-left: 30px;
-  margin-right: 30px;
-  margin-top: 190px;
-  font-size: 25px;
-  margin-bottom: 20px;
-  padding: 20px 30px;
-  border: 5px dashed;
-  border-radius: 12px;
-  background-color: goldenrod;
-} */
-
 input {
   width: 300px;
   font-size: 15px;
@@ -62,7 +32,7 @@ input {
   border-color: rgb(67, 201, 203);
 }
 
-.main {
+.maindiv {
   display: flex;
   justify-content: center;
 }
@@ -89,12 +59,12 @@ input {
   margin-right: 20px;
 }
 
-.value {
+.spannamefirst {
   font-size: 52px;
   color: rgb(224, 131, 184);
 }
 
-.spannames {
+.spannamessecond {
   display: flex;
   justify-content: center;
   text-align: center;
