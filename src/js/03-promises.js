@@ -29,8 +29,8 @@ function turnOnOurSubmit(evt) {
   const { delay, step, amount } = evt.currentTarget.elements;
 
   // Цикл, який генерує проміси в залежності від значення `amount`
-  for (let i = 0, position = 1; i < amount.value; i += 1, position += 1) {
-    // Обчислення загальної затримки для кожного промісу
+  for (let i = 0; i < amount.value; i++) {
+    const position = i + 1;
     const delayAll = Number(delay.value) + step.value * i;
     // Виклик функції `createPromise` для створення промісу з позицією та затримкою
     newPromises(position, delayAll)
@@ -48,3 +48,16 @@ function turnOnOurSubmit(evt) {
       });
   }
 }
+
+// for (let i = 0; i < amount.value; i++) {
+//   const position = i + 1;
+//   const delayAll = Number(delay.value) + step.value * i;
+
+//   newPromises(position, delayAll)
+//     .then(({ position, delay }) => {
+//       Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
+//     })
+//     .catch(({ position, delay }) => {
+//       Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
+//     });
+// }
