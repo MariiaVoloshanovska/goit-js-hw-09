@@ -10,10 +10,10 @@ function changeColor() {
 }
 
 startBtn.addEventListener('click', () => {
+  startBtn.disabled = true;
+  stopBtn.disabled = false;
   timerId = setInterval(() => {
     changeColor();
-    startBtn.disabled = true;
-    stopBtn.disabled = false;
   }, 1000);
 });
 
