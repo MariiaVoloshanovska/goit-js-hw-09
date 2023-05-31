@@ -13,7 +13,6 @@ const refs = {
   seconds: document.querySelector('[data-seconds]'),
 };
 
-// кнопка не активна (Вимкнення кнопки "startBtn" (disabled))
 refs.startBtn.disabled = true;
 
 // Об'єкт параметрів для Flatpickr
@@ -22,45 +21,47 @@ const options = {
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
-  onClose(selectedDates) {
-    console.log(selectedDates[0]);
-    if (selectedDates[0] < new Date()) {
+
+  onClose() {
+    const currentDay = new Date();
+    const dedline = new Date(refs.input.value);
+
+    if (dedline < currentDay) {
+      refs.startBtn.disabled = true;
       Notiflix.Notify.failure('Please choose a date in the future');
-      return;
+    } else {
+      refs.startBtn.disabled = false;
     }
-    refs.startBtn.disabled = false;
   },
 };
 
-// вибір дати та часу (Ініціалізація Flatpickr з використанням вхідного поля та параметрів)
+refs.startBtn.addEventListener('click', () => {
+  const timerID = setInterval(() => {
+    const currentDay = new Date();
+    const dedline = new Date(refs.input.value);
+    const difference = dedline - currentDay;
+
+    if (difference <= 0) {
+      Notiflix.Notify.success();
+      clearInterval(timerID);
+      return;
+    }
+
+    const { days, hours, minutes, seconds } = convertMs(difference);
+
+    refs.days.textContent = contentadded(days);
+    refs.hours.textContent = contentadded(hours);
+    refs.minutes.textContent = contentadded(minutes);
+    refs.seconds.textContent = contentadded(seconds);
+  }, 1000);
+});
+
+// Функція для додавання ведучих нулів до значень
+function contentadded(value) {
+  return String(value).padStart(2, '0');
+}
 flatpickr(refs.input, options);
 
-// Додавання обробника події на кнопку "startBtn"
-refs.startBtn.addEventListener('click', startTime);
-
-// старт відліку часу
-let timerId = null;
-function startTime() {
-  refs.startBtn.disabled = true;
-  timerId = setInterval(changeTime, 1000);
-}
-
-// // Функція для зміни відображення часу
-function changeTime() {
-  const selectedDate = new Date(refs.input.value).getTime();
-  const currentDate = new Date().getTime();
-  const differenceTime = selectedDate - currentDate;
-
-  const ourtimeData = convertMs(differenceTime);
-
-  if (differenceTime <= 1) {
-    return clearInterval(intervalTime);
-  }
-  refs.days.textContent = contentadded(ourtimeData.days);
-  refs.hours.textContent = contentadded(ourtimeData.hours);
-  refs.minutes.textContent = contentadded(ourtimeData.minutes);
-  refs.seconds.textContent = contentadded(ourtimeData.seconds);
-}
 function convertMs(ms) {
   // Number of milliseconds per unit of time
   const second = 1000;
@@ -78,11 +79,6 @@ function convertMs(ms) {
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
   return { days, hours, minutes, seconds };
-}
-
-// Функція для додавання ведучих нулів до значень
-function contentadded(value) {
-  return String(value).padStart(2, '0');
 }
 
 // Цей код використовує бібліотеку Flatpickr для створення вікна вибору дати та часу. Основна функціональність цього коду полягає у відліку часу від обраної дати до поточного моменту.
