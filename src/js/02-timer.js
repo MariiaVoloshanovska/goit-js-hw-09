@@ -13,10 +13,10 @@ const refs = {
   seconds: document.querySelector('[data-seconds]'),
 };
 
-// кнопка не активна (відключення кнопки)
+// кнопка не активна (Вимкнення кнопки "startBtn" (disabled))
 refs.startBtn.disabled = true;
 
-// об'єкт параметрів
+// Об'єкт параметрів для Flatpickr
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -36,9 +36,10 @@ const options = {
 //     position: 'center-center',
 //   });
 
-// вибір дати та часу
+// вибір дати та часу (Ініціалізація Flatpickr з використанням вхідного поля та параметрів)
 flatpickr(refs.input, options);
 
+// Додавання обробника події на кнопку "startBtn"
 refs.startBtn.addEventListener('click', startTime);
 
 // старт відліку часу
@@ -48,7 +49,7 @@ function startTime() {
   timerId = setInterval(changeTime, 1000);
 }
 
-// зміна часу
+// // Функція для зміни відображення часу
 function changeTime() {
   const selectedDate = new Date(refs.input.value).getTime();
   const currentDate = new Date().getTime();
@@ -83,11 +84,21 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
-// форматування часу
+// Функція для додавання ведучих нулів до значень
 function addLeadingZero(value) {
   return String(value).padStart(2, '0');
 }
 
-console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
-console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
-console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
+// Цей код використовує бібліотеку Flatpickr для створення вікна вибору дати та часу. Основна функціональність цього коду полягає у відліку часу від обраної дати до поточного моменту.
+
+// Основні етапи виконання коду:
+
+// 1. Імпортується бібліотека Flatpickr та додаткові стилі для неї.
+// 2. Визначаються посилання на елементи DOM, такі як вхідне поле дати, кнопка "Start", та елементи, які відображатимуть розрахований час.
+// 3. Кнопка "Start" вимкнена (disabled).
+// 4. Визначаються параметри для Flatpickr, такі як включений режим вибору часу, формат 24-годинного часу, початкова дата за замовчуванням, тощо. При закритті вікна вибору дати, перевіряється, чи обрана дата є майбутньою. Якщо ні, то виводиться повідомлення про помилку за допомогою бібліотеки Notiflix, і кнопка "Start" залишається вимкненою. Якщо обрана дата є майбутньою, кнопка "Start" активується (disabled = false).
+// 5. Ініціалізується Flatpickr на вхідному полі дати з використанням визначених параметрів.
+// 6. Додається обробник події на кнопку "Start", який викликає функцію `startTime()`.
+// 7. Функція `startTime()` вимикає кнопку "Start" (disabled = true) та запускає таймер, який викликає функцію `changeTime()` кожну секунду.
+// 8. Функція `changeTime()` розраховує різницю між обраною датою та поточним моментом, конвертує цю різницю в дні, години, хвилини та секунди за допомогою функції `convertMs()`, та відображає ці значення на сторінці.
+// 9. Функція `convertMs()` приймає мілі
