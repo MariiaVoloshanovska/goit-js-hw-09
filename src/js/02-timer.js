@@ -32,10 +32,6 @@ const options = {
   },
 };
 
-//   Notiflix.Notify.init({
-//     position: 'center-center',
-//   });
-
 // вибір дати та часу (Ініціалізація Flatpickr з використанням вхідного поля та параметрів)
 flatpickr(refs.input, options);
 
